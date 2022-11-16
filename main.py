@@ -207,7 +207,9 @@ with desafio4:
 # Etapa 6: Invoca função de avaliação de resultado (teste x treino)
 with desafio5:
     "# Modelo de classificação e análise de regressão "
-
+    
+    botao_resultado = st.button('Exibir Resultados')
+    
     # 1
     nome_colunas_numericas = []
 
@@ -237,7 +239,7 @@ with desafio5:
 
     resultado = round(resultado, 2)
     
-    if st.button('Say hello'):
+    if botao_resultado:
 
         latest_iteration = st.empty()
         bar = st.progress(0)
@@ -253,7 +255,7 @@ with desafio5:
                 '...separando os não-spams'
             if i == 75:
                 '...validando resultados'
-            if i == 75:
+            if i == 95:
                 '...exibindo métricas'
         
         st.metric(label="A taxa de previsao de spam ou não-spam das mensagens é de: ", value=f'{resultado}%')
