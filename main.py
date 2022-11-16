@@ -259,4 +259,4 @@ with desafio5:
                 '...exibindo métricas'
         
         st.write("##### A taxa de previsao de spam ou não-spam das mensagens é de: ")
-        st.write(f"##### {resultado}")
+        st.write(f"##### {resultado}%")
