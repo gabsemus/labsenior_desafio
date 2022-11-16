@@ -258,4 +258,5 @@ with desafio5:
             if i == 95:
                 '...exibindo métricas'
         
-        st.metric(label="A taxa de previsao de spam ou não-spam das mensagens é de: ", value=f'{resultado}%')
+        st.write("##### A taxa de previsao de spam ou não-spam das mensagens é de: ")
+        st.write(f"##### {resultado}")
