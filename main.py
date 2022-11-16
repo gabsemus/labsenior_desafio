@@ -5,7 +5,7 @@ from sklearn.svm import LinearSVC
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 
-home = "# Home page "
+home = "# Senior Labs Challenge "
 
 st.sidebar.markdown(home)
 st.markdown(home)
@@ -67,7 +67,7 @@ st.bar_chart(df_frequencia_palavras)
 
 # Etapa 1: Criar uma coluna 'Mês' com base na informação da coluna 'Date'
 # Etapa 2: Contar os valores da coluna 'Mês' das mensagens spam e não spam
-# Etapa 3: Criar função que retorna o gráfico de pizza dos valores totais e percentuais de mensagens por mês
+# Etapa 3: Exibir gráfico de mensagens spams e não-spams
 
 
 st.write("""
@@ -75,9 +75,10 @@ st.write("""
 ### Avaliação de mensagens Spams e Não-Spams por mês: 
 
 """)
-
+# 1
 df['mes'] = pd.DatetimeIndex(df['Date']).month
 
+# 2
 df_mes_spam = df[df['IsSpam'] == 'yes']
 
 df_mes_nao_spam = df[df['IsSpam'] == 'no']
@@ -86,6 +87,7 @@ df_mes_spam = df_mes_spam['mes'].value_counts()
 
 df_mes_nao_spam = df_mes_nao_spam['mes'].value_counts()
 
+# 3
 st.write("""
 ##### Mensagens de spam por mês: 
 """)
@@ -100,13 +102,14 @@ st.bar_chart(df_mes_nao_spam)
 
 # =====================================================================================================
 
-# Etapa 1: Criado um dicionário em que as chaves é o nome da medida calculada e o valor é o resultado do cálculo correspondente
+# Etapa 1: Criado um dicionário em que as chaves são os nomes das medidas calculadas e o meses e os valores são os resultados dos cálculos correspondentes
 # Etapa 2: Cálculado o máximo da quantidade total de palavras
 # Etapa 3: Cálculado o mínimo da quantidade total de palavras
 # Etapa 4: Cálculado a média da quantidade total de palavras
 # Etapa 5: Cálculado a mediana da quantidade total de palavras
 # Etapa 6: Cálculado o desvio padrão da quantidade total de palavras
 # Etapa 7: Cálculado a variância da quantidade total de palavras
+# Etapa 8: Questiona o cálculo e o mês e devolve o resultado
 
 st.write("""
 
@@ -117,23 +120,24 @@ st.write("""
 st.write("""
 Utilize o menu lateral para selecionar o mês e o cálculo desejado
 """)
-
+# 1
 Total_Palavras = {}
 
 for mes in df.mes.unique():
     df_123 = df[df['mes'] == mes]
-
+# 2
     Total_Palavras[('Maximo', mes)] = df_123['Word_Count'].max()
-
+# 3
     Total_Palavras[('Mínimo', mes)] = df_123['Word_Count'].min()
-
+# 4
     Total_Palavras[('Média', mes)] = df_123['Word_Count'].mean()
-
+# 5
     Total_Palavras[('Mediana', mes)] = df_123['Word_Count'].median()
-
+# 6
     Total_Palavras[('Desvio Padrão', mes)] = df_123['Word_Count'].std()
-
+# 7
     Total_Palavras[('Variância', mes)] = df_123['Word_Count'].var()
+# 8
 
 left_column, right_column = st.columns(2)
 
@@ -154,36 +158,34 @@ with right_column:
     st.write(f"##### {total_opcao} do {total_mes}° mês:")
     st.write(f"##### {Total_Palavras[total_opcao, total_mes]}")
 
-
-
 # =====================================================================================================
 
 # Etapa 1: Criar uma coluna 'Dia' com base na informação da coluna 'Date';
 # Etapa 2: Contar os valores da coluna 'Dia e Mês' e filtrar os valores da mensagens comuns (não spam);
 # Etapa 3: Pivotar a tabela, sendo as colunas os valores da coluna 'mes'
-# Etapa 4: Pivotar a tabela, sendo as colunas os valores da coluna 'mes'
-# Etapa 5: Obter os maiores valores das colunas correspondente aos meses e salvar o valor do dia
-# Etapa 6: Para faciliar a visualização, iterei sobre o resultado e salvei num dicionário com as chaves correspondendo ao mês e os valores correspondendo ao dias
+# Etapa 4: Obter os maiores valores das colunas correspondente aos meses e salvar o valor do dia
+# Etapa 5: Para faciliar a visualização, iterei sobre o resultado e salvei num dicionário com as chaves correspondendo ao mês e os valores correspondendo ao dias
+# Etapa 6: Questiona o mês e devolve o dia com mais quantidade
 
 st.write("""
 
 ### Dia com maior quantidade de mensagens não-spam por mês: 
 
 """)
-
+# 1
 df['dia'] = pd.DatetimeIndex(df['Date']).day
-
+# 2
 novo_df = df[df['IsSpam'] == 'no'].value_counts(['dia', 'mes'])
-
+# 3
 novo_df = novo_df.unstack(level=1)
-
+# 4
 novo_df = novo_df.idxmax()
-
+# 5
 dicio_novo = {}
 
 for x in novo_df.items():
     dicio_novo[x[0]] = x[1]
-
+# 6
 left_column, right_column = st.columns(2)
 
 with left_column:
@@ -194,10 +196,14 @@ with right_column:
 
 # =====================================================================================================
 
-home = "# Modelo de classificação e análise de regressão "
+# Etapa 1: Separar os atributos númericos dos objetos;
+# Etapa 2: Separar os valores de treino e teste;
+# Etapa 3: Define modelo de cálculo LinearSVC e invoca classe;
+# Etapa 4: Treina modelo de teste
+# Etapa 5: Cria modelo de previsão binário
+# Etapa 6: Invoca função de avaliação de resultado (teste x treino)
 
-st.sidebar.markdown(home)
-st.markdown(home)
+home = "# Modelo de classificação e análise de regressão "
 
 'Avaliando modelo de dados...'
 
@@ -213,7 +219,7 @@ for i in range(100):
 
 '...clique para visualizar os resultados'
 
-#
+# 1
 nome_colunas_numericas = []
 
 for coluna in colunas:
@@ -225,14 +231,19 @@ x = df[nome_colunas_numericas]
 
 y = df['IsSpam']
 
-modelo = LinearSVC(max_iter=100000)
-
+# 2
 treino_x, teste_x, treino_y, teste_y = train_test_split(x, y)
 
+# 3
+modelo = LinearSVC(max_iter=100000)
+
+# 4
 modelo.fit(treino_x, treino_y)
 
+# 5
 previsao = modelo.predict(teste_x)
 
+# 6
 resultado = accuracy_score(teste_y, previsao) * 100
 
 resultado = round(resultado, 2)
