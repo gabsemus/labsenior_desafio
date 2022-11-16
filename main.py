@@ -13,26 +13,27 @@ df = pd.read_csv('https://raw.githubusercontent.com/SeniorSA/seniorlabs-challeng
 # df.head()
 
 # Definindo as guias
-desafio1, desafio2, desafio3, desafio4, desafio5 = st.tabs(["Desafio 1", "Desafio 2", "Desafio 3", "Desafio 4", "Desafio 5"])
+desafio1, desafio2, desafio3, desafio4, desafio5 = st.tabs(
+    ["Desafio 1", "Desafio 2", "Desafio 3", "Desafio 4", "Desafio 5"])
 
 with desafio1:
-# =====================================================================================================
+    # =====================================================================================================
 
-# Etapa 1: Listar as colunas
-# Etapa 2: Definir os tipos que serão somados
-# Etapa 3: Eliminar os valores de totais acumulados (Common_Words_Count, Word_Count)
-# Etapa 4: Iterar sobre as colunas e validar as seguintes informações:
-#          A coluna é de valor númerico?
-#          A coluna é dos totais acumulados (Common_Words_Count, Word_Count)?
-# Etapa 5: Calcular o total da coluna e salvar num dicionário
-# Etapa 6: Organizar o dicionário em ordem decescente pelo valores
-# Etapa 7: Questionar o usuário a quantidade de itens que ele deseja visualizar
-# Etapa 8: Exibir o TOP-N valores com base na quantidade que o usuário solicitou
+    # Etapa 1: Listar as colunas
+    # Etapa 2: Definir os tipos que serão somados
+    # Etapa 3: Eliminar os valores de totais acumulados (Common_Words_Count, Word_Count)
+    # Etapa 4: Iterar sobre as colunas e validar as seguintes informações:
+    #          A coluna é de valor númerico?
+    #          A coluna é dos totais acumulados (Common_Words_Count, Word_Count)?
+    # Etapa 5: Calcular o total da coluna e salvar num dicionário
+    # Etapa 6: Organizar o dicionário em ordem decescente pelo valores
+    # Etapa 7: Questionar o usuário a quantidade de itens que ele deseja visualizar
+    # Etapa 8: Exibir o TOP-N valores com base na quantidade que o usuário solicitou
 
     st.write("""
-    
+
     ### Avaliando a nossa base de dados, separamos as palavras mais comuns: 
-    
+
     """)
 
     # 1
@@ -71,11 +72,10 @@ with desafio1:
 # Etapa 3: Exibir gráfico de mensagens spams e não-spams
 
 with desafio2:
-
     st.write("""
-    
+
     ### Avaliação de mensagens Spams e Não-Spams por mês: 
-    
+
     """)
     # 1
     df['mes'] = pd.DatetimeIndex(df['Date']).month
@@ -114,11 +114,10 @@ with desafio2:
 # Etapa 8: Questiona o cálculo e o mês e devolve o resultado
 
 with desafio3:
-
     st.write("""
-    
+
     ### Cáluclos e medidas por mês: 
-    
+
     """)
 
     st.write("""
@@ -129,17 +128,17 @@ with desafio3:
 
     for mes in df.mes.unique():
         df_123 = df[df['mes'] == mes]
-    # 2
+        # 2
         Total_Palavras[('Maximo', mes)] = df_123['Word_Count'].max()
-    # 3
+        # 3
         Total_Palavras[('Mínimo', mes)] = df_123['Word_Count'].min()
-    # 4
+        # 4
         Total_Palavras[('Média', mes)] = df_123['Word_Count'].mean()
-    # 5
+        # 5
         Total_Palavras[('Mediana', mes)] = df_123['Word_Count'].median()
-    # 6
+        # 6
         Total_Palavras[('Desvio Padrão', mes)] = df_123['Word_Count'].std()
-    # 7
+        # 7
         Total_Palavras[('Variância', mes)] = df_123['Word_Count'].var()
     # 8
 
@@ -172,9 +171,9 @@ with desafio3:
 # Etapa 6: Questiona o mês e devolve o dia com mais quantidade
 with desafio4:
     st.write("""
-    
+
     ### Dia com maior quantidade de mensagens não-spam por mês: 
-    
+
     """)
     # 1
     df['dia'] = pd.DatetimeIndex(df['Date']).day
@@ -209,20 +208,6 @@ with desafio4:
 with desafio5:
     "# Modelo de classificação e análise de regressão "
 
-    'Avaliando modelo de dados...'
-
-    # Add a placeholder
-    latest_iteration = st.empty()
-    bar = st.progress(0)
-
-    for i in range(100):
-        # Update the progress bar with each iteration.
-        latest_iteration.text(f'Iteration {i+1}')
-        bar.progress(i + 1)
-        time.sleep(0.1)
-
-    '...clique para visualizar os resultados'
-
     # 1
     nome_colunas_numericas = []
 
@@ -251,5 +236,24 @@ with desafio5:
     resultado = accuracy_score(teste_y, previsao) * 100
 
     resultado = round(resultado, 2)
+    
+    if st.button('Say hello'):
 
-    st.metric(label="A taxa de previsao de spam ou não-spam das mensagens é de: ", value=f'{resultado}%')
+        latest_iteration = st.empty()
+        bar = st.progress(0)
+        'Avaliando modelo de dados...'
+        for i in range(100):
+            # Update the progress bar with each iteration.
+            latest_iteration.text(f'Iteration {i + 1}')
+            bar.progress(i + 1)
+            time.sleep(0.05)
+            if i == 25:
+                '...separando os spams'
+            if i == 50:
+                '...separando os não-spams'
+            if i == 75:
+                '...validando resultados'
+            if i == 75:
+                '...exibindo métricas'
+        
+        st.metric(label="A taxa de previsao de spam ou não-spam das mensagens é de: ", value=f'{resultado}%')
