@@ -1,17 +1,12 @@
 # Read Me
 
-Link do desafio: https://github.com/SeniorSA/seniorlabs-challenge/blob/main/data-science.md
+Link do desafio: 
 
-Ferramentas utilizadas: 
-  
-  pandas: https://pandas.pydata.org/
-  
-  streamlit: https://streamlit.io/
-  
-  scikit-learn: https://scikit-learn.org/
+https://github.com/SeniorSA/seniorlabs-challenge/blob/main/data-science.md
 
 App para visualização dos dados e achados: 
-  https://gabsemus-labsenior-desafio-main-ku99fy.streamlit.app/
+
+https://gabsemus-labsenior-desafio-main-ku99fy.streamlit.app/
   
 # Documentação:
 
@@ -131,3 +126,11 @@ Neste caso, o método está sendo aplicado em um nó entre os destinatários (N)
 Foi utilizado um modelo de classificador linear binário não probabilístico, o modelo toma como entrada um conjunto de dados (quantidade de repetição de palavras comuns por palavra comun, quantidade total de palavras da mensagem, quantidade de palavras comuns na mensagem e retorna, para cada entrada dada, se a mensagem é spam (yes) ou não-spam (no).
 
 O resultado final, comparando os valores de treino e teste, superou ~90% de acertividade.
+
+Ferramentas utilizadas: 
+  
+  pandas: https://pandas.pydata.org/
+  
+  streamlit: https://streamlit.io/
+  
+  scikit-learn: https://scikit-learn.org/
