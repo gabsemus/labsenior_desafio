@@ -203,7 +203,7 @@ with right_column:
 # Etapa 5: Cria modelo de previsão binário
 # Etapa 6: Invoca função de avaliação de resultado (teste x treino)
 
-home = "# Modelo de classificação e análise de regressão "
+"# Modelo de classificação e análise de regressão "
 
 'Avaliando modelo de dados...'
 
