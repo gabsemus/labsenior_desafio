@@ -3,8 +3,11 @@
 Link do desafio: https://github.com/SeniorSA/seniorlabs-challenge/blob/main/data-science.md
 
 Ferramentas utilizadas: 
+  
   pandas: https://pandas.pydata.org/
+  
   streamlit: https://streamlit.io/
+  
   scikit-learn: https://scikit-learn.org/
 
 App para visualização dos dados e achados: 
