@@ -1,9 +1,9 @@
 import streamlit as st
 import pandas as pd
 import time
-# from sklearn.svm import LinearSVC
-# from sklearn.model_selection import train_test_split
-# from sklearn.metrics import accuracy_score
+from sklearn.svm import LinearSVC
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
 
 st.markdown("# Senior Labs Challenge ")
 
@@ -12,10 +12,6 @@ df = pd.read_csv('https://raw.githubusercontent.com/SeniorSA/seniorlabs-challeng
                  encoding='unicode_escape')
 # df.head()
 
-# Definindo as guias
-desafio1, desafio2, desafio3, desafio4, desafio5 = st.tabs(["Desafio 1", "Desafio 2", "Desafio 3", "Desafio 4", "Desafio 5"])
-
-with desafio1:
 # =====================================================================================================
 
 # Etapa 1: Listar as colunas
@@ -29,40 +25,40 @@ with desafio1:
 # Etapa 7: Questionar o usuário a quantidade de itens que ele deseja visualizar
 # Etapa 8: Exibir o TOP-N valores com base na quantidade que o usuário solicitou
 
-    st.write("""
-    
-    ### Avaliando a nossa base de dados, separamos as palavras mais comuns: 
-    
-    """)
+st.write("""
 
-    # 1
-    colunas = df.columns.values.tolist()
-    # 2
-    tipos_numericos = ['float64', 'int64']
-    # 3
-    valores_acumulados = ['Common_Word_Count', 'Word_Count']
+### Avaliando a nossa base de dados, separamos as palavras mais comuns: 
 
-    frequencia_palavras = {}
-    # 4
-    for coluna in colunas:
-        tipo = df[coluna].dtype
-        if tipo in tipos_numericos and coluna not in valores_acumulados:
-            # 5
-            total = df[coluna].sum()
-            frequencia_palavras[coluna] = total
+""")
 
-    # 6
-    quantidade_palavras = st.slider('Selecione a quantide de palavras:', 1, 149, 5, 1)
+# 1
+colunas = df.columns.values.tolist()
+# 2
+tipos_numericos = ['float64', 'int64']
+# 3
+valores_acumulados = ['Common_Word_Count', 'Word_Count']
 
-    frequencia_palavras = dict(
-        sorted(frequencia_palavras.items(),
-               key=lambda item: item[1], reverse=True)
-        # 7
-        [:quantidade_palavras])
-    # 8
-    df_frequencia_palavras = pd.DataFrame(frequencia_palavras, index=[0])
+frequencia_palavras = {}
+# 4
+for coluna in colunas:
+    tipo = df[coluna].dtype
+    if tipo in tipos_numericos and coluna not in valores_acumulados:
+        # 5
+        total = df[coluna].sum()
+        frequencia_palavras[coluna] = total
 
-    st.bar_chart(df_frequencia_palavras)
+# 6
+quantidade_palavras = st.slider('Selecione a quantide de palavras:', 1, 149, 5, 1)
+
+frequencia_palavras = dict(
+    sorted(frequencia_palavras.items(),
+           key=lambda item: item[1], reverse=True)
+    # 7
+    [:quantidade_palavras])
+# 8
+df_frequencia_palavras = pd.DataFrame(frequencia_palavras, index=[0])
+
+st.bar_chart(df_frequencia_palavras)
 
 # =====================================================================================================
 
@@ -70,37 +66,36 @@ with desafio1:
 # Etapa 2: Contar os valores da coluna 'Mês' das mensagens spam e não spam
 # Etapa 3: Exibir gráfico de mensagens spams e não-spams
 
-with desafio2:
 
-    st.write("""
-    
-    ### Avaliação de mensagens Spams e Não-Spams por mês: 
-    
-    """)
-    # 1
-    df['mes'] = pd.DatetimeIndex(df['Date']).month
+st.write("""
 
-    # 2
-    df_mes_spam = df[df['IsSpam'] == 'yes']
+### Avaliação de mensagens Spams e Não-Spams por mês: 
 
-    df_mes_nao_spam = df[df['IsSpam'] == 'no']
+""")
+# 1
+df['mes'] = pd.DatetimeIndex(df['Date']).month
 
-    df_mes_spam = df_mes_spam['mes'].value_counts()
+# 2
+df_mes_spam = df[df['IsSpam'] == 'yes']
 
-    df_mes_nao_spam = df_mes_nao_spam['mes'].value_counts()
+df_mes_nao_spam = df[df['IsSpam'] == 'no']
 
-    # 3
-    st.write("""
-    ##### Mensagens de spam por mês: 
-    """)
+df_mes_spam = df_mes_spam['mes'].value_counts()
 
-    st.bar_chart(df_mes_spam)
+df_mes_nao_spam = df_mes_nao_spam['mes'].value_counts()
 
-    st.write("""
-    ##### Mensagens não-spam por mês: 
-    """)
+# 3
+st.write("""
+##### Mensagens de spam por mês: 
+""")
 
-    st.bar_chart(df_mes_nao_spam)
+st.bar_chart(df_mes_spam)
+
+st.write("""
+##### Mensagens não-spam por mês: 
+""")
+
+st.bar_chart(df_mes_nao_spam)
 
 # =====================================================================================================
 
@@ -113,54 +108,52 @@ with desafio2:
 # Etapa 7: Cálculado a variância da quantidade total de palavras
 # Etapa 8: Questiona o cálculo e o mês e devolve o resultado
 
-with desafio3:
+st.write("""
 
-    st.write("""
-    
-    ### Cáluclos e medidas por mês: 
-    
-    """)
+### Cáluclos e medidas por mês: 
 
-    st.write("""
-    Utilize o menu lateral para selecionar o mês e o cálculo desejado
-    """)
-    # 1
-    Total_Palavras = {}
+""")
 
-    for mes in df.mes.unique():
-        df_123 = df[df['mes'] == mes]
-    # 2
-        Total_Palavras[('Maximo', mes)] = df_123['Word_Count'].max()
-    # 3
-        Total_Palavras[('Mínimo', mes)] = df_123['Word_Count'].min()
-    # 4
-        Total_Palavras[('Média', mes)] = df_123['Word_Count'].mean()
-    # 5
-        Total_Palavras[('Mediana', mes)] = df_123['Word_Count'].median()
-    # 6
-        Total_Palavras[('Desvio Padrão', mes)] = df_123['Word_Count'].std()
-    # 7
-        Total_Palavras[('Variância', mes)] = df_123['Word_Count'].var()
-    # 8
+st.write("""
+Utilize o menu lateral para selecionar o mês e o cálculo desejado
+""")
+# 1
+Total_Palavras = {}
 
-    left_column, right_column = st.columns(2)
+for mes in df.mes.unique():
+    df_123 = df[df['mes'] == mes]
+# 2
+    Total_Palavras[('Maximo', mes)] = df_123['Word_Count'].max()
+# 3
+    Total_Palavras[('Mínimo', mes)] = df_123['Word_Count'].min()
+# 4
+    Total_Palavras[('Média', mes)] = df_123['Word_Count'].mean()
+# 5
+    Total_Palavras[('Mediana', mes)] = df_123['Word_Count'].median()
+# 6
+    Total_Palavras[('Desvio Padrão', mes)] = df_123['Word_Count'].std()
+# 7
+    Total_Palavras[('Variância', mes)] = df_123['Word_Count'].var()
+# 8
 
-    with left_column:
-        total_opcao = st.selectbox(
-            'Selecione a medida de cálculo: ',
-            ('Maximo', 'Mínimo', 'Média', 'Mediana', 'Desvio Padrão', 'Variância'))
+left_column, right_column = st.columns(2)
 
-        total_mes = st.number_input(
-            'Selecione o mês para visualilzação: ',
-            min_value=1,
-            max_value=3,
-            value=1,
-            step=1
-        )
+with left_column:
+    total_opcao = st.selectbox(
+        'Selecione a medida de cálculo: ',
+        ('Maximo', 'Mínimo', 'Média', 'Mediana', 'Desvio Padrão', 'Variância'))
 
-    with right_column:
-        st.write(f"##### {total_opcao} do {total_mes}° mês:")
-        st.write(f"##### {Total_Palavras[total_opcao, total_mes]}")
+    total_mes = st.number_input(
+        'Selecione o mês para visualilzação: ',
+        min_value=1,
+        max_value=3,
+        value=1,
+        step=1
+    )
+
+with right_column:
+    st.write(f"##### {total_opcao} do {total_mes}° mês:")
+    st.write(f"##### {Total_Palavras[total_opcao, total_mes]}")
 
 # =====================================================================================================
 
@@ -170,33 +163,33 @@ with desafio3:
 # Etapa 4: Obter os maiores valores das colunas correspondente aos meses e salvar o valor do dia
 # Etapa 5: Para faciliar a visualização, iterei sobre o resultado e salvei num dicionário com as chaves correspondendo ao mês e os valores correspondendo ao dias
 # Etapa 6: Questiona o mês e devolve o dia com mais quantidade
-with desafio4:
-    st.write("""
-    
-    ### Dia com maior quantidade de mensagens não-spam por mês: 
-    
-    """)
-    # 1
-    df['dia'] = pd.DatetimeIndex(df['Date']).day
-    # 2
-    novo_df = df[df['IsSpam'] == 'no'].value_counts(['dia', 'mes'])
-    # 3
-    novo_df = novo_df.unstack(level=1)
-    # 4
-    novo_df = novo_df.idxmax()
-    # 5
-    dicio_novo = {}
 
-    for x in novo_df.items():
-        dicio_novo[x[0]] = x[1]
-    # 6
-    left_column, right_column = st.columns(2)
+st.write("""
 
-    with left_column:
-        mes_input = st.number_input('Selecione o mês: ', min_value=1, max_value=3, value=1, step=1)
+### Dia com maior quantidade de mensagens não-spam por mês: 
 
-    with right_column:
-        st.metric(label="Dia com a maior quantidade de mensagens não-spam", value=f'{dicio_novo[mes_input]}° dia')
+""")
+# 1
+df['dia'] = pd.DatetimeIndex(df['Date']).day
+# 2
+novo_df = df[df['IsSpam'] == 'no'].value_counts(['dia', 'mes'])
+# 3
+novo_df = novo_df.unstack(level=1)
+# 4
+novo_df = novo_df.idxmax()
+# 5
+dicio_novo = {}
+
+for x in novo_df.items():
+    dicio_novo[x[0]] = x[1]
+# 6
+left_column, right_column = st.columns(2)
+
+with left_column:
+    mes_input = st.number_input('Selecione o mês: ', min_value=1, max_value=3, value=1, step=1)
+
+with right_column:
+    st.metric(label="Dia com a maior quantidade de mensagens não-spam", value=f'{dicio_novo[mes_input]}° dia')
 
 # =====================================================================================================
 
@@ -206,50 +199,50 @@ with desafio4:
 # Etapa 4: Treina modelo de teste
 # Etapa 5: Cria modelo de previsão binário
 # Etapa 6: Invoca função de avaliação de resultado (teste x treino)
-with desafio5:
-    "# Modelo de classificação e análise de regressão "
 
-    'Avaliando modelo de dados...'
+"# Modelo de classificação e análise de regressão "
 
-    # Add a placeholder
-    latest_iteration = st.empty()
-    bar = st.progress(0)
+'Avaliando modelo de dados...'
 
-    for i in range(100):
-        # Update the progress bar with each iteration.
-        latest_iteration.text(f'Iteration {i+1}')
-        bar.progress(i + 1)
-        time.sleep(0.1)
+# Add a placeholder
+latest_iteration = st.empty()
+bar = st.progress(0)
 
-    '...clique para visualizar os resultados'
+for i in range(100):
+    # Update the progress bar with each iteration.
+    latest_iteration.text(f'Iteration {i+1}')
+    bar.progress(i + 1)
+    time.sleep(0.1)
 
-    # 1
-    nome_colunas_numericas = []
+'...clique para visualizar os resultados'
 
-    for coluna in colunas:
-        tipo = df[coluna].dtype
-        if tipo in tipos_numericos:
-            nome_colunas_numericas.append(coluna)
+# 1
+nome_colunas_numericas = []
 
-    x = df[nome_colunas_numericas]
+for coluna in colunas:
+    tipo = df[coluna].dtype
+    if tipo in tipos_numericos:
+        nome_colunas_numericas.append(coluna)
 
-    y = df['IsSpam']
+x = df[nome_colunas_numericas]
 
-    # 2
-    treino_x, teste_x, treino_y, teste_y = train_test_split(x, y)
+y = df['IsSpam']
 
-    # 3
-    modelo = LinearSVC(max_iter=100000)
+# 2
+treino_x, teste_x, treino_y, teste_y = train_test_split(x, y)
 
-    # 4
-    modelo.fit(treino_x, treino_y)
+# 3
+modelo = LinearSVC(max_iter=100000)
 
-    # 5
-    previsao = modelo.predict(teste_x)
+# 4
+modelo.fit(treino_x, treino_y)
 
-    # 6
-    resultado = accuracy_score(teste_y, previsao) * 100
+# 5
+previsao = modelo.predict(teste_x)
 
-    resultado = round(resultado, 2)
+# 6
+resultado = accuracy_score(teste_y, previsao) * 100
 
-    st.metric(label="A taxa de previsao de spam ou não-spam das mensagens é de: ", value=f'{resultado}%')
+resultado = round(resultado, 2)
+
+st.metric(label="A taxa de previsao de spam ou não-spam das mensagens é de: ", value=f'{resultado}%')
