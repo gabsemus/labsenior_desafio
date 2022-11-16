@@ -5,10 +5,7 @@ from sklearn.svm import LinearSVC
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 
-home = "# Senior Labs Challenge "
-
-st.sidebar.markdown(home)
-st.markdown(home)
+st.markdown("# Senior Labs Challenge ")
 
 # lê a base de dados
 df = pd.read_csv('https://raw.githubusercontent.com/SeniorSA/seniorlabs-challenge/main/sms_senior.csv',
