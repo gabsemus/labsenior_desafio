@@ -14,6 +14,7 @@ https://gabsemus-labsenior-desafio-main-ku99fy.streamlit.app/
 Exibir gráfico as palavras mais frequentes em toda a base de dados (Ex.: gráfico de barras, nuvem de palavras, etc).
  
 Etapas para resolução do desafio:
+
   Etapa 1: Listar as colunas
   
   Etapa 2: Definir os tipos que serão somados
