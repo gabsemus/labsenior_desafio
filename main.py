@@ -27,7 +27,7 @@ df = pd.read_csv('https://raw.githubusercontent.com/SeniorSA/seniorlabs-challeng
 
 st.write("""
 
-##### Avaliando a nossa base de dados, separamos as palavras mais comuns: 
+### Avaliando a nossa base de dados, separamos as palavras mais comuns: 
 
 """)
 
