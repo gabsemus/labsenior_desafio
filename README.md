@@ -8,7 +8,7 @@ App para visualização dos dados e achados:
 
 https://gabsemus-labsenior-desafio-main-ku99fy.streamlit.app/
   
-# Documentação:
+# Documentação dos Desafios e Soluções:
 
 #  Desafio 1:
 Exibir gráfico as palavras mais frequentes em toda a base de dados (Ex.: gráfico de barras, nuvem de palavras, etc).
