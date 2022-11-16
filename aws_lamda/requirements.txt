@@ -1,0 +1,5 @@
+aws-lambda-powertools
+aws-lambda-powertools[validation]
+aws-lambda-powertools[tracer,parser]
+aws-lambda-powertools[aws-sdk]
+datetime
