@@ -1,5 +1,7 @@
 # Read Me
 
+# Data Science
+
 Link do desafio: 
 
 https://github.com/SeniorSA/seniorlabs-challenge/blob/main/data-science.md
@@ -135,3 +137,50 @@ Ferramentas utilizadas:
   streamlit: https://streamlit.io/
   
   scikit-learn: https://scikit-learn.org/
+
+
+# Software Engineering
+
+Link do desafio: 
+
+https://github.com/SeniorSA/seniorlabs-challenge/blob/main/software-engineering.md
+
+End-Point para Registro do Ponto:
+
+https://3vdq9ster8.execute-api.us-east-1.amazonaws.com/production/
+
+Exemplo de registro:
+
+Utilizando o payload de exemplo:
+
+{
+"employerId": 999,
+"employeeId": 123, 
+"includedAt":"2021-03-15 15:10:00"
+}
+
+Temos o seguinte url:
+
+https://3vdq9ster8.execute-api.us-east-1.amazonaws.com/production/?employerId=999&employeeId=123&includedAt=2021-03-15%2015:10:00
+
+Resultando no seguinte resultado:
+
+{"message":"Registrado com Sucesso!"}
+
+O app utiliza como lógica um encademaneto de funções que seguem o seguinte fluxo:
+
+Validação da integralidade da requisição;
+Validação da tipagem dos dados;
+Validação do formato dos dados (data/hora);
+Realização do Envio da Mensagem POST;
+Validação do resultado do envio;
+Validação de erros do App.
+
+Foi utilizado a biblioteca da AWS:
+
+aws-lambda-powertools
+
+com os seguintes componentes:
+  aws-lambda-powertools[validation]
+  aws-lambda-powertools[tracer]
+  aws-lambda-powertools[parser]
