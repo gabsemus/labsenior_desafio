@@ -170,10 +170,15 @@ Resultando no seguinte resultado:
 O app utiliza como lógica um encademaneto de funções que seguem o seguinte fluxo:
 
 Validação da integralidade da requisição;
+
 Validação da tipagem dos dados;
+
 Validação do formato dos dados (data/hora);
+
 Realização do Envio da Mensagem POST;
+
 Validação do resultado do envio;
+
 Validação de erros do App.
 
 Foi utilizado a biblioteca da AWS:
@@ -181,6 +186,13 @@ Foi utilizado a biblioteca da AWS:
 aws-lambda-powertools
 
 com os seguintes componentes:
+
   aws-lambda-powertools[validation]
+  
   aws-lambda-powertools[tracer]
+  
   aws-lambda-powertools[parser]
+  
+É possível conferir o código e os comentários no link: 
+
+https://github.com/gabsemus/labsenior_desafio/blob/main/aws_lamda/main.py
